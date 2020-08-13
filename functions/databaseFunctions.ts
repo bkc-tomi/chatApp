@@ -1,4 +1,4 @@
-import { FBdb } from "../lib/firebase";
+import { FBdb } from "./firebase";
 
 export const setData = async(texts: string[]):Promise<string> => {
     const message:string = await FBdb.collection("foo").doc("bar").set({
