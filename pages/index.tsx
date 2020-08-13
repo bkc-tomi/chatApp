@@ -1,65 +1,53 @@
 import BasicHead from "../components/atom/head";
 import basicData from "../components/atom/basicData";
 
-// firebaseを試すために読み込む
-import { useState } from "react";
-import { setData, getData } from "../functions/databaseFunctions";
+import BasicButton from "../components/atom/button";
+import BasicTextField from "../components/atom/textbox";
+import ContainerDiv from "../components/atom/containerDiv";
+import BasicParagraph from "../components/atom/basicP";
+import BasicHeader1 from "../components/atom/basicH1";
+import BasicHeader2 from "../components/atom/basicH2";
 
 
 export default function Home() {
-    // 入力されたテキスト
-    const [text, setText]       = useState("");
-    // DBに保存した結果の表示
-    const [message, setMessage] = useState("");
-    // DBに保存するテキストのリスト
-    const [texts, setTexts]     = useState<string[]>([]);
-    // DBから読み込んだデータのリスト(textsと一致する)
-    const [datas, setDatas]     = useState([]);
 
-    // 入力された文字を変数textに反映
-    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-        setText(event.target.value);
+    const handleClick = () => {
+
     }
+    const handleChange = () => {
 
-    // DBに保存を実行
-    const handleClick = async() => {
-        const tempTexts = [...texts];
-        tempTexts.push(text);
-        setTexts(tempTexts);
-        const msg = await setData(tempTexts);
-        setMessage(`${msg}: ${text}`);
     }
-
-    // DBからデータを読み込む
-    const reloadData = async() => {
-        const tempData = await getData();
-        console.log(tempData);
-        setDatas(tempData.texts);
-    }
-
     return (
         <div>
             <BasicHead />
-            <h1>{ basicData.title }</h1>
-            <input 
-                type="text" 
-                value={ text } 
-                onChange={ handleChange }
+            <BasicHeader1>
+                { basicData.title }
+            </BasicHeader1>
+            <ContainerDiv>
+                <BasicButton
+                    onclick={ handleClick }
+                >
+                    Button
+                </BasicButton>
+                <BasicButton
+                    onclick={ handleClick }
+                >
+                    ボタン
+                </BasicButton>
+            </ContainerDiv>
+            <ContainerDiv>
+                <BasicHeader2>this is header</BasicHeader2>
+                <BasicParagraph>
+                The text size can be set with a vw unit, which means the "viewport width".
+                That way the text size will follow the size of the browser window:
+                </BasicParagraph>
+            </ContainerDiv>
+            <br/>
+            <BasicTextField 
+                onchange={ handleChange }
+                value={ "string" }
+                label={ "text box"}
             />
-            <button 
-                type="button"
-                onClick={ handleClick }
-            >保存</button>
-            <button 
-                type="button"
-                onClick={ reloadData }
-            >リロード</button>
-            <p>{ message }</p>
-            <ul>
-                { datas.map((data, index) => (
-                    <li key={ index }>{ data }</li>
-                ))}
-            </ul>
         </div>
     );
 }

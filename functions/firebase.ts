@@ -3,10 +3,10 @@ import "firebase/auth";
 import "firebase/firestore";
 
 let FB:any;
-export let FBdb:firebase.firestore.Firestore;
-export let FBstorage:firebase.storage.Storage;
-export let googleProvider:firebase.auth.GoogleAuthProvider;
-export let twitterProvider:firebase.auth.TwitterAuthProvider;
+export         let FBdb:firebase.firestore.Firestore;
+export         let FBstorage:firebase.storage.Storage;
+export         let googleProvider:firebase.auth.GoogleAuthProvider;
+export         let twitterProvider:firebase.auth.TwitterAuthProvider;
 export default FB;
 
 try {
@@ -25,8 +25,8 @@ try {
     
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     
-    FBdb      = firebase.firestore();
-    FBstorage = firebase.storage();
+    FBdb            = firebase.firestore();
+    FBstorage       = firebase.storage();
     googleProvider  = new firebase.auth.GoogleAuthProvider();
     twitterProvider = new firebase.auth.TwitterAuthProvider();
     FB = firebase;

@@ -1,8 +1,9 @@
-// @ts-ignore
+// @ts-ignore ←jsファイルなのにtypescriptが幅を効かすってなんなのよ？
 const webpack = require("webpack");
 require("dotenv").config();
 
 module.exports = {
+    // dotenv
     webpack: config => {
         const env = Object.keys(process.env).reduce((acc, curr) => {
             acc[`process.env.${curr}`] = JSON.stringify(process.env[curr]);
@@ -10,9 +11,9 @@ module.exports = {
         }, {});
 
         config.plugins.push(new webpack.DefinePlugin(env));
-
         return config;
     },
+    // vercelでの環境変数のパスを通す
     env: {
         apiKey:            process.env.FB_API_KEY,
         authDomain:        process.env.FB_AUTH_DOMAIN,
