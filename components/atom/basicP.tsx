@@ -4,13 +4,18 @@ import { themeColor } from "./styles";
 import MediaQuery from "react-responsive";
 
 const containerStyles = makeStyles(() => createStyles({
-    container: {
-        color: themeColor.textBlack,
-        fontSize: "20px",
+    inlineBlock: {
+        display: "inline-block",
     },
-    spContainer: {
+    container: {
+        display: "inline-block",
         color: themeColor.textBlack,
         fontSize: "16px",
+    },
+    spContainer: {
+        display: "inline-block",
+        color: themeColor.textBlack,
+        fontSize: "12px",
     },
 }));
 
@@ -21,7 +26,7 @@ type ParagraphProps = {
 const BasicParagraph:FC<ParagraphProps> = (props) => {
     const classes = containerStyles();
     return (
-        <div>
+        <div className={ classes.inlineBlock }>
             <MediaQuery query="(min-width: 768px)">
                 <div className={ classes.container }>
                     { props.children }

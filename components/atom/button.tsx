@@ -18,15 +18,32 @@ const buttonStyles = makeStyles({
 })
 
 type BtnProps = {
-    onclick: Function,
+    onclick?: Function,
     children?: React.ReactNode,
+    fullWidth?: boolean,
 }
 
 const BasicButton:FC<BtnProps> = (props) => {
     const classes = buttonStyles();
+
+    if (!props.onclick) {
+        return (
+            <Button
+                variant="contained"
+                fullWidth={ props.fullWidth }
+                classes={{
+                    root: classes.root
+                }}
+            >
+                { props.children }
+            </Button>
+        );
+    }
+    
     return (
         <Button
             variant="contained"
+            fullWidth={ props.fullWidth }
             onClick={ () => props.onclick() }
             classes={{
                 root: classes.root

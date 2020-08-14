@@ -1,0 +1,63 @@
+.body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.titlePC {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px 10px 20px;
+    margin: 0 auto;
+}
+.titleSP {
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 20px;
+    margin: 0 auto;
+}
+
+.description {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    margin: 50px auto 20px;
+}
+
+.buttonArea {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 10px 100px;
+    margin: 10px auto;
+}
+
+.button {
+    display: flex;
+    float: left;
+    width: 46%;
+    margin: 2%;
+}
+
+.titlesvg {
+    fill: #ff0000;
+    color: #ff0000;
+}
+
+.chachat {
+    width: 30%;
+    margin: 0 auto;
+}
+.chat {
+    width: 30%;
+    margin: 0 auto;
+}
+.sento {
+    width: 30%;
+    margin: 0 auto;
+}
+.ikanto {
+    width: 30%;
+    margin: 0 auto;
+}

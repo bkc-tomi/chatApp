@@ -4,12 +4,13 @@ import { themeColor, Shadow } from "./styles";
 
 const containerStyles = makeStyles(() => createStyles({
     container: {
+        position: "relative",
         display: "inline-block",
         padding: "0.5rem",
         borderRadius: "5px",
         margin: "0.5rem",
         background: themeColor.bgWhite,
-        boxShadow: Shadow.style1
+        boxShadow: Shadow.style3
     }
 }))
 
