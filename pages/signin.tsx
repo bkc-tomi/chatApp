@@ -91,14 +91,14 @@ export default function SignIn() {
                         <BasicButton
                             fullWidth={ true }
                         >
-                            <i className="fab fa-google"></i>　Googleでログイン
+                            Googleでログイン
                         </BasicButton>
                         </div>
                         <div className={ Styles.innerbox }>
                         <BasicButton
                             fullWidth={ true }
                         >
-                            <i className="fab fa-twitter"></i>　Twitterでログイン
+                            Twitterでログイン
                         </BasicButton>
                         </div>
                     </ContainerDiv>

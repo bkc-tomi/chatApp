@@ -8,7 +8,6 @@ export default function BasicHead() {
             <meta name="description" content={ basicData.description }/>
             <meta name="keywords" content={ basicData.content }/>
             <link rel="icon" href="/favicon.ico" />
-            <script src="https://kit.fontawesome.com/1a97c90b78.js"></script>
         </Head>
     );
 }
