@@ -84,7 +84,21 @@ export default function SignIn() {
                         <BasicButton
                             fullWidth={ true }
                         >
-                            登録
+                            ログイン
+                        </BasicButton>
+                        </div>
+                        <div className={ Styles.innerbox }>
+                        <BasicButton
+                            fullWidth={ true }
+                        >
+                            <i className="fab fa-google"></i>　Googleでログイン
+                        </BasicButton>
+                        </div>
+                        <div className={ Styles.innerbox }>
+                        <BasicButton
+                            fullWidth={ true }
+                        >
+                            <i className="fab fa-twitter"></i>　Twitterでログイン
                         </BasicButton>
                         </div>
                     </ContainerDiv>
