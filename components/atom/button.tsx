@@ -8,7 +8,7 @@ const buttonStyles = makeStyles({
         background: themeColor.bgGrad,
         paddingLeft: "30px",
         paddingRight: "30px",
-        margin: "0px 5px",
+        margin: "0",
         boxShadow: Shadow.style2,
         "&:hover": {
             background: themeColor.bgGrad,

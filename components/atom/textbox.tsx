@@ -4,7 +4,7 @@ import { themeColor } from "./styles";
 
 const TextStyles = makeStyles({
     root: {
-        margin: "0.5rem",
+        margin: "0",
         "& .MuiInput-underline:after":{
             borderBottom: `2px solid ${ themeColor.main }`,
         },
@@ -31,7 +31,7 @@ const BasicTextField:FC<TextProps> = (props) => {
             fullWidth={ props.fullWidth }
             label={ props.label }
             multiline={ props.multiline }
-            onChange={ () => props.onchange() }
+            onChange={ (event:React.ChangeEvent<{ value: unknown }>) => props.onchange(event) }
             value={ props.value }
             classes={{
                 root: classes.root,

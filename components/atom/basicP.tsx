@@ -9,12 +9,10 @@ const containerStyles = makeStyles(() => createStyles({
     },
     container: {
         display: "inline-block",
-        color: themeColor.textBlack,
         fontSize: "16px",
     },
     spContainer: {
         display: "inline-block",
-        color: themeColor.textBlack,
         fontSize: "12px",
     },
 }));

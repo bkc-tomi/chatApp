@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Router from "next/router";
 import BasicHead from "../components/atom/head";
 import basicData from "../components/atom/basicData";
 
@@ -28,15 +30,17 @@ export default function Home() {
                     </div>
                     <div className={ styles.buttonArea }>
                         <div className={ styles.button }>
-                        <BasicButton
-                            fullWidth={ true }
-                        >登録</BasicButton>
+                            <BasicButton
+                                fullWidth ={ true }
+                                onclick   ={() => Router.push("/signup")}
+                            >登録</BasicButton>
                         </div>
 
                         <div className={ styles.button }>
-                        <BasicButton
-                            fullWidth={ true }
-                        >ログイン</BasicButton>
+                            <BasicButton
+                                fullWidth ={ true }
+                                onclick   ={() => Router.push("/signin")}
+                            >ログイン</BasicButton>
                         </div>
                     </div>
                     <CreateNow />
@@ -55,15 +59,17 @@ export default function Home() {
                     </div>
                     <div className={ styles.buttonArea }>
                         <div className={ styles.button }>
-                        <BasicButton
-                            fullWidth={ true }
-                        >登録</BasicButton>
+                            <BasicButton
+                                fullWidth ={ true }
+                                onclick   ={() => Router.push("/signup")}
+                            >登録</BasicButton>
                         </div>
 
                         <div className={ styles.button }>
-                        <BasicButton
-                            fullWidth={ true }
-                        >ログイン</BasicButton>
+                            <BasicButton
+                                fullWidth ={ true }
+                                onclick   ={() => Router.push("/signin")}
+                            >ログイン</BasicButton>
                         </div>
                     </div>
                     <CreateNow />
