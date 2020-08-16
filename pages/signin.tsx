@@ -8,14 +8,18 @@ import BasicTextField from "../components/atom/textbox";
 import BasicButton from "../components/atom/button";
 import ContainerDiv from "../components/atom/containerDiv";
 
+import basicData from "../components/atom/basicData";
+
 import Styles from "../styles/signin.module.css";
 
 import { validationEmail, validationPassword } from "../functions/validation";
+import { signinUser, signinWithGoogle, signinWithTwitter, signinAnonymous } from "../functions/auth";
 
 
 export default function SignIn() {
     const [email   , setEmail]    = useState("");
     const [password, setPassword] = useState("");
+    const [ disable, setDisable ] = useState(false);
 
     const [emailMessage   , setEM] = useState(["メールアドレスを入力してください。", "#000000"]);
     const [passwordMessage, setPM] = useState(["パスワードは半角のアルファベット・数字をそれぞれ１文字以上を含む８文字以上１００文字以内です。", "#000000"]);
@@ -36,6 +40,55 @@ export default function SignIn() {
             setPM(["パスワードは半角のアルファベット・数字をそれぞれ１文字以上を含む８文字以上１００文字以内です。", "#ff0000"]);
         }
     }
+
+    const handleSignin = async() => {
+        setDisable(true);
+        if (emailMessage[0] === "OK!!" && passwordMessage[0] === "OK!!") {
+            const bool:boolean = await signinUser(email, password);
+            if (bool) {
+                console.log("successfully!");
+            } else {
+                console.log("failed.");
+            }
+            setDisable(false);
+        } else {
+            alert("メールアドレス・パスワードを入力してください。");
+            setDisable(false);
+        }
+    }
+    
+    const handleSigninWithGoogle = async() => {
+        setDisable(true);
+        const bool:boolean = await signinWithGoogle();
+        if (bool) {
+            console.log("successfully!");
+        } else {
+            console.log("failed.");
+        }
+        setDisable(false);
+    }
+
+    const handleSigninWithTwitter = async() => {
+        setDisable(true);
+        const bool:boolean = await signinWithTwitter();
+        if (bool) {
+            console.log("successfully!");
+        } else {
+            console.log("failed.");
+        }
+        setDisable(false);
+    }
+
+    const handleSigninAnonymous = async() => {
+        setDisable(true);
+        const bool:boolean = await signinAnonymous();
+        if (bool) {
+            console.log("successfully!");
+        } else {
+            console.log("failed.");
+        }
+        setDisable(false);
+    }
     return (
         <div>
             <BasicHead />
@@ -51,7 +104,7 @@ export default function SignIn() {
                         </div>
                         <div　className={ Styles.paragraph }>
                             <BasicParagraph>
-                                登録が済まれている方はこちらからログインしてください。
+                                { basicData.signin }
                             </BasicParagraph>
                         </div>
                         <div className={ Styles.innerbox }>
@@ -82,23 +135,38 @@ export default function SignIn() {
                         </div>
                         <div className={ Styles.innerbox }>
                         <BasicButton
-                            fullWidth={ true }
+                            fullWidth ={ true }
+                            disabled  ={ disable }
+                            onclick   ={ handleSignin }
                         >
                             ログイン
                         </BasicButton>
                         </div>
                         <div className={ Styles.innerbox }>
                         <BasicButton
-                            fullWidth={ true }
+                            fullWidth ={ true }
+                            disabled  ={ disable }
+                            onclick   ={ handleSigninWithGoogle }
                         >
                             Googleでログイン
                         </BasicButton>
                         </div>
                         <div className={ Styles.innerbox }>
                         <BasicButton
-                            fullWidth={ true }
+                            fullWidth ={ true }
+                            disabled  ={ disable }
+                            onclick   ={ handleSigninWithTwitter }
                         >
                             Twitterでログイン
+                        </BasicButton>
+                        </div>
+                        <div className={ Styles.innerbox }>
+                        <BasicButton
+                            fullWidth ={ true }
+                            disabled  ={ disable }
+                            onclick   ={ handleSigninAnonymous }
+                        >
+                            匿名ログイン
                         </BasicButton>
                         </div>
                     </ContainerDiv>

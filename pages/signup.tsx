@@ -8,14 +8,18 @@ import BasicTextField from "../components/atom/textbox";
 import BasicButton from "../components/atom/button";
 import ContainerDiv from "../components/atom/containerDiv";
 
+import basicData from "../components/atom/basicData";
+
 import Styles from "../styles/signup.module.css";
 
 import { validationEmail, validationPassword } from "../functions/validation";
+import { signupUser } from "../functions/auth";
 
 
 export default function SignUp() {
     const [email   , setEmail]    = useState("");
     const [password, setPassword] = useState("");
+    const [ disable, setDisable ] = useState(false);
 
     const [emailMessage   , setEM] = useState(["メールアドレスを入力してください。", "#000000"]);
     const [passwordMessage, setPM] = useState(["パスワードは半角のアルファベット・数字をそれぞれ１文字以上を含む８文字以上１００文字以内で指定してください。", "#000000"]);
@@ -36,6 +40,23 @@ export default function SignUp() {
             setPM(["パスワードは半角のアルファベット・数字をそれぞれ１文字以上を含む８文字以上１００文字以内で指定してください。", "#ff0000"]);
         }
     }
+
+    const handleSignup = async() => {
+        setDisable(true);
+        if (emailMessage[0] === "OK!!" && passwordMessage[0] === "OK!!") {
+            const bool:boolean = await signupUser(email, password);
+            if (bool) {
+                console.log("successfully!");
+            } else {
+                console.log("failed.");
+            }
+            setDisable(false);
+        } else {
+            alert("メールアドレス・パスワードを入力してください。");
+            setDisable(false);
+        }
+    }
+    
     return (
         <div>
             <BasicHead />
@@ -51,7 +72,7 @@ export default function SignUp() {
                         </div>
                         <div　className={ Styles.paragraph }>
                             <BasicParagraph>
-                                初めての人は、ここでメールアドレスとパスワードの登録をしてください。
+                                { basicData.signup }
                             </BasicParagraph>
                         </div>
                         <div className={ Styles.innerbox }>
@@ -82,7 +103,9 @@ export default function SignUp() {
                         </div>
                         <div className={ Styles.innerbox }>
                         <BasicButton
-                            fullWidth={ true }
+                            fullWidth ={ true }
+                            disabled  ={ disable }
+                            onclick   ={ handleSignup }
                         >
                             登録
                         </BasicButton>

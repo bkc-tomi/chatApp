@@ -11,6 +11,8 @@ import CreateNow from "../components/compo/createNow";
 import styles from "../styles/root.module.css";
 import MediaQuery from "react-responsive";
 
+import Tooltip from "@material-ui/core/Tooltip";
+
 
 export default function Home() {
     return (
@@ -29,19 +31,22 @@ export default function Home() {
                         </BasicParagraph>
                     </div>
                     <div className={ styles.buttonArea }>
-                        <div className={ styles.button }>
-                            <BasicButton
-                                fullWidth ={ true }
-                                onclick   ={() => Router.push("/signup")}
-                            >登録</BasicButton>
-                        </div>
-
-                        <div className={ styles.button }>
-                            <BasicButton
-                                fullWidth ={ true }
-                                onclick   ={() => Router.push("/signin")}
-                            >ログイン</BasicButton>
-                        </div>
+                        <Tooltip title={ basicData.signup }>
+                            <div className={ styles.button }>
+                                    <BasicButton
+                                        fullWidth ={ true }
+                                        onclick   ={() => Router.push("/signup")}
+                                    >登録</BasicButton>
+                            </div>
+                        </Tooltip>
+                        <Tooltip title={ basicData.signin }>
+                            <div className={ styles.button }>
+                                <BasicButton
+                                    fullWidth ={ true }
+                                    onclick   ={() => Router.push("/signin")}
+                                >ログイン</BasicButton>
+                            </div>
+                        </Tooltip>
                     </div>
                     <CreateNow />
                 </main>
@@ -58,19 +63,22 @@ export default function Home() {
                         </BasicParagraph>
                     </div>
                     <div className={ styles.buttonArea }>
-                        <div className={ styles.button }>
-                            <BasicButton
-                                fullWidth ={ true }
-                                onclick   ={() => Router.push("/signup")}
-                            >登録</BasicButton>
-                        </div>
-
-                        <div className={ styles.button }>
-                            <BasicButton
-                                fullWidth ={ true }
-                                onclick   ={() => Router.push("/signin")}
-                            >ログイン</BasicButton>
-                        </div>
+                        <Tooltip title={ basicData.signup }>
+                            <div className={ styles.button }>
+                                    <BasicButton
+                                        fullWidth ={ true }
+                                        onclick   ={() => Router.push("/signup")}
+                                    >登録</BasicButton>
+                            </div>
+                        </Tooltip>
+                        <Tooltip title={ basicData.signin }>
+                            <div className={ styles.button }>
+                                <BasicButton
+                                    fullWidth ={ true }
+                                    onclick   ={() => Router.push("/signin")}
+                                >ログイン</BasicButton>
+                            </div>
+                        </Tooltip>
                     </div>
                     <CreateNow />
                 </main>

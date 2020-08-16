@@ -3,11 +3,10 @@ import "firebase/auth";
 import "firebase/firestore";
 
 let FB:any;
-export         let FBdb:firebase.firestore.Firestore;
-export         let FBstorage:firebase.storage.Storage;
-export         let googleProvider:firebase.auth.GoogleAuthProvider;
-export         let twitterProvider:firebase.auth.TwitterAuthProvider;
-export default FB;
+export let FBdb:firebase.firestore.Firestore;
+export let FBstorage:firebase.storage.Storage;
+export let googleProvider:firebase.auth.GoogleAuthProvider;
+export let twitterProvider:firebase.auth.TwitterAuthProvider;
 
 try {
     const firebaseConfig = {
@@ -29,7 +28,10 @@ try {
     FBstorage       = firebase.storage();
     googleProvider  = new firebase.auth.GoogleAuthProvider();
     twitterProvider = new firebase.auth.TwitterAuthProvider();
-    FB = firebase;
+    FB              = firebase.auth();
+    console.log("firebase init!");
 } catch (error) {
     console.log(error);
 }
+
+export default FB;
