@@ -95,6 +95,7 @@ export const signout = async():Promise<boolean> => {
         return true;
     })
     .catch(error => {
+        console.log(error);
         return false;
     });
     return bool;
@@ -104,9 +105,10 @@ export const signout = async():Promise<boolean> => {
  * ユーザのログイン状態を確認する
  * ログイン状態ならtrue, ログインしていないならfalseを返す。
  */
-export const activeUserExist = ():boolean => {
+export const activeUserExist = async():Promise<boolean> => {
     let bool:boolean;
-    FB.onAuthStateChanged((user) => {
+    await FB.onAuthStateChanged((user) => {
+        console.log(user);
         if (user) {
             bool = true;
         } else {
@@ -114,4 +116,9 @@ export const activeUserExist = ():boolean => {
         }
     });
     return bool;
+}
+
+export const getActiveUser = () => {
+    const user = FB.currentUser;
+    return user;
 }

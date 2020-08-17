@@ -1,0 +1,32 @@
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 15%;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.register {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.paragraph {
+    margin: 1rem;
+}
+
+.box {
+    box-sizing: border-box;
+    margin: calc(300px - 20vw) auto 0;
+    max-width: 500px;
+}
+
+.innerbox {
+    margin: 1rem;
+}
+
+.inputFile {
+    width: 100%;
+}

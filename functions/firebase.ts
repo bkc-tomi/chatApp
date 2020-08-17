@@ -2,7 +2,7 @@ import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
 
-let FB:any;
+let FB:firebase.auth.Auth;
 export let FBdb:firebase.firestore.Firestore;
 export let FBstorage:firebase.storage.Storage;
 export let googleProvider:firebase.auth.GoogleAuthProvider;

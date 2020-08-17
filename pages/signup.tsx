@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router from "next/router";
 
 import BasicHead from "../components/atom/head";
 import TitleLogo from "../components/atom/logo";
@@ -47,6 +48,7 @@ export default function SignUp() {
             const bool:boolean = await signupUser(email, password);
             if (bool) {
                 console.log("successfully!");
+                Router.push("/profile/setting");
             } else {
                 console.log("failed.");
             }

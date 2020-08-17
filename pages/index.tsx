@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Router from "next/router";
 import BasicHead from "../components/atom/head";
 import basicData from "../components/atom/basicData";

@@ -26,3 +26,17 @@ export const validationPassword = (value:string):boolean => {
     }
     return bool;
 }
+
+/**
+ * ユーザネームのバリデーションチェック関数
+ * ユーザネームは１文字以上で指定する。
+ * 真偽を返す。
+ * @param value username
+ */
+export const validationUsername = (value:string):boolean => {
+    let bool:boolean = false;
+    if (value.length >= 1) {
+        bool = true;
+    }
+    return bool;
+}

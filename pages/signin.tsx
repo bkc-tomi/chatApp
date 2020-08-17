@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router from "next/router";
 
 import BasicHead from "../components/atom/head";
 import TitleLogo from "../components/atom/logo";
@@ -84,6 +85,7 @@ export default function SignIn() {
         const bool:boolean = await signinAnonymous();
         if (bool) {
             console.log("successfully!");
+            Router.push("/profile/setting");
         } else {
             console.log("failed.");
         }

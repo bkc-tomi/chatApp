@@ -8,6 +8,7 @@ const basicData = {
     content: "chat, チャット, ちゃちゃっと, アプリ, App",
     signin: "登録が済まれている方はこちらからログインしてください。またGoogle, Twitter, 匿名ログインもこちらからお願いします。",
     signup: "初めての人は、ここでメールアドレスとパスワードの登録をしてください。またGoogle, Twitter, 匿名はログインからお願いします。",
+    
 }
 
 export default basicData;

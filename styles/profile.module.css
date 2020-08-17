@@ -1,0 +1,9 @@
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 15%;
+    min-width: 200px;
+    min-height: 200px;
+}
