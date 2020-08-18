@@ -14,3 +14,14 @@ export const saveUserImage = async(image, uid:string):Promise<[boolean, string]>
     });
     return [bool, fullPath];
 }
+
+export const getUserImageUrl = async(imagePath:string):Promise<[any, boolean]> => {
+    let Url:any, bool = false;
+    const ImageRef = FBstorage.ref();
+    await ImageRef.child(imagePath).getDownloadURL()
+    .then(url => {
+        Url = url;
+        bool = true;
+    });
+    return [Url, bool]
+}

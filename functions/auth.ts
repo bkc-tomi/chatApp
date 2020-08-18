@@ -105,10 +105,9 @@ export const signout = async():Promise<boolean> => {
  * ユーザのログイン状態を確認する
  * ログイン状態ならtrue, ログインしていないならfalseを返す。
  */
-export const activeUserExist = async():Promise<boolean> => {
+export const activeUserExist = async() => {
     let bool:boolean;
     await FB.onAuthStateChanged((user) => {
-        console.log(user);
         if (user) {
             bool = true;
         } else {

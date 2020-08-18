@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import BasicHead from "../components/atom/head";
 import TitleLogo from "../components/atom/logo";
@@ -14,10 +14,11 @@ import basicData from "../components/atom/basicData";
 import Styles from "../styles/signin.module.css";
 
 import { validationEmail, validationPassword } from "../functions/validation";
-import { signinUser, signinWithGoogle, signinWithTwitter, signinAnonymous } from "../functions/auth";
+import { signinUser, signinWithGoogle, signinWithTwitter, signinAnonymous, getActiveUser } from "../functions/auth";
 
 
 export default function SignIn() {
+    const router = useRouter();
     const [email   , setEmail]    = useState("");
     const [password, setPassword] = useState("");
     const [ disable, setDisable ] = useState(false);
@@ -48,6 +49,8 @@ export default function SignIn() {
             const bool:boolean = await signinUser(email, password);
             if (bool) {
                 console.log("successfully!");
+                const activeUser = getActiveUser()
+                router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
             } else {
                 console.log("failed.");
             }
@@ -63,6 +66,8 @@ export default function SignIn() {
         const bool:boolean = await signinWithGoogle();
         if (bool) {
             console.log("successfully!");
+            const activeUser = getActiveUser()
+            router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
         } else {
             console.log("failed.");
         }
@@ -74,6 +79,8 @@ export default function SignIn() {
         const bool:boolean = await signinWithTwitter();
         if (bool) {
             console.log("successfully!");
+            const activeUser = getActiveUser()
+            router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
         } else {
             console.log("failed.");
         }
@@ -85,7 +92,7 @@ export default function SignIn() {
         const bool:boolean = await signinAnonymous();
         if (bool) {
             console.log("successfully!");
-            Router.push("/profile/setting");
+            router.push("/profile/setting");
         } else {
             console.log("failed.");
         }

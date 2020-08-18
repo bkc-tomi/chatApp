@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import BasicHead from "../components/atom/head";
 import TitleLogo from "../components/atom/logo";
@@ -18,6 +18,7 @@ import { signupUser } from "../functions/auth";
 
 
 export default function SignUp() {
+    const router = useRouter();
     const [email   , setEmail]    = useState("");
     const [password, setPassword] = useState("");
     const [ disable, setDisable ] = useState(false);
@@ -48,7 +49,7 @@ export default function SignUp() {
             const bool:boolean = await signupUser(email, password);
             if (bool) {
                 console.log("successfully!");
-                Router.push("/profile/setting");
+                router.push("/profile/setting");
             } else {
                 console.log("failed.");
             }

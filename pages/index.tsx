@@ -1,4 +1,4 @@
-import Router from "next/router";
+import { useRouter } from "next/router";
 import BasicHead from "../components/atom/head";
 import basicData from "../components/atom/basicData";
 
@@ -14,6 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 
 export default function Home() {
+    const router = useRouter();
     return (
         <div className={ styles.body }>
             <BasicHead />
@@ -34,7 +35,7 @@ export default function Home() {
                             <div className={ styles.button }>
                                     <BasicButton
                                         fullWidth ={ true }
-                                        onclick   ={() => Router.push("/signup")}
+                                        onclick   ={() => router.push("/signup")}
                                     >登録</BasicButton>
                             </div>
                         </Tooltip>
@@ -42,7 +43,7 @@ export default function Home() {
                             <div className={ styles.button }>
                                 <BasicButton
                                     fullWidth ={ true }
-                                    onclick   ={() => Router.push("/signin")}
+                                    onclick   ={() => router.push("/signin")}
                                 >ログイン</BasicButton>
                             </div>
                         </Tooltip>
@@ -66,7 +67,7 @@ export default function Home() {
                             <div className={ styles.button }>
                                     <BasicButton
                                         fullWidth ={ true }
-                                        onclick   ={() => Router.push("/signup")}
+                                        onclick   ={() => router.push("/signup")}
                                     >登録</BasicButton>
                             </div>
                         </Tooltip>
@@ -74,7 +75,7 @@ export default function Home() {
                             <div className={ styles.button }>
                                 <BasicButton
                                     fullWidth ={ true }
-                                    onclick   ={() => Router.push("/signin")}
+                                    onclick   ={() => router.push("/signin")}
                                 >ログイン</BasicButton>
                             </div>
                         </Tooltip>

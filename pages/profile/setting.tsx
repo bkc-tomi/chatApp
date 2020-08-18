@@ -1,4 +1,4 @@
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import BasicHead from "../../components/atom/head";
@@ -11,11 +11,12 @@ import ContainerDiv from "../../components/atom/containerDiv";
 
 import { activeUserExist, getActiveUser } from "../../functions/auth";
 import { validationUsername } from "../../functions/validation";
-import { saveUserImage } from "../../functions/storage";
+import { saveUserImage, getUserImageUrl } from "../../functions/storage";
 
 import Styles from "../../styles/setting.module.css";
 
 export default function SettingProfile() {
+    const router = useRouter();
     const [username, setUsername] = useState("");
     const [UMessage, setUMessage] = useState(["ユーザネームを決めてください。", "#000000"]);
     const [photo   , setPhoto   ] = useState();
@@ -55,13 +56,16 @@ export default function SettingProfile() {
                 if (photo) {
                     const [bool, fullPath] = await saveUserImage(photo, user.uid);
                     if (bool) {
-                        saveUserdata(user, fullPath);
+                        const [url, ] = await getUserImageUrl(fullPath);
+                        console.log(url);
+                        saveUserdata(user, url);
                         
                     }
                 } else {
-                    saveUserdata(user, "userPhoto/default-user-image.png");
+                    const [url, ] = await getUserImageUrl("userPhoto/default-user-image.png");
+                    saveUserdata(user, url);
                 }
-                Router.push("profile/" + username);
+                router.push("[username]", `${ username }`);
             } else {
                 alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");
                 setDisable(false);
