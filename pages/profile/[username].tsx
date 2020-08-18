@@ -14,7 +14,9 @@ export default function Profile() {
     useEffect(() => {
         const temp = getActiveUser();
         setUser(temp);
-    },[user]);
+        console.log(temp);
+    }, [user]);
+
 
     return (
         <div>

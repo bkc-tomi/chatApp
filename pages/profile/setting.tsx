@@ -52,7 +52,7 @@ export default function SettingProfile() {
         if (UMessage[0] === "OK!!") {
             setDisable(true);
             if (await activeUserExist()) {
-                const user = getActiveUser();
+                const user = await getActiveUser();
                 if (photo) {
                     const [bool, fullPath] = await saveUserImage(photo, user.uid);
                     if (bool) {
@@ -65,6 +65,7 @@ export default function SettingProfile() {
                     const [url, ] = await getUserImageUrl("userPhoto/default-user-image.png");
                     saveUserdata(user, url);
                 }
+
                 router.push("[username]", `${ username }`);
             } else {
                 alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");

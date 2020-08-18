@@ -49,7 +49,7 @@ export default function SignIn() {
             const bool:boolean = await signinUser(email, password);
             if (bool) {
                 console.log("successfully!");
-                const activeUser = getActiveUser()
+                const activeUser = await getActiveUser()
                 router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
             } else {
                 console.log("failed.");
@@ -66,7 +66,7 @@ export default function SignIn() {
         const bool:boolean = await signinWithGoogle();
         if (bool) {
             console.log("successfully!");
-            const activeUser = getActiveUser()
+            const activeUser = await getActiveUser()
             router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
         } else {
             console.log("failed.");
@@ -79,7 +79,7 @@ export default function SignIn() {
         const bool:boolean = await signinWithTwitter();
         if (bool) {
             console.log("successfully!");
-            const activeUser = getActiveUser()
+            const activeUser = await getActiveUser()
             router.push("/profile/[username]", `/profile/${ activeUser.displayName }`);
         } else {
             console.log("failed.");
