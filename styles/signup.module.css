@@ -4,8 +4,8 @@
     left: 0;
     width: 15%;
     height: 15%;
-    min-width: 200px;
-    min-height: 200px;
+    min-width: 80px;
+    min-height: 80px;
 }
 
 .register {
@@ -19,7 +19,7 @@
 
 .box {
     box-sizing: border-box;
-    margin: calc(300px - 20vw) auto 0;
+    margin: 100px auto 100px;
     max-width: 500px;
 }
 

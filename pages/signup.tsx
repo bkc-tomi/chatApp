@@ -97,6 +97,7 @@ export default function SignUp() {
                             value     ={ password }
                             onchange  ={ handleChangePassword }
                             fullWidth ={ true }
+                            type      ="password"
                         />
                         <div style={{color: passwordMessage[1]}}>
                             <BasicParagraph>

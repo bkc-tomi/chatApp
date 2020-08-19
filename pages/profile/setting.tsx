@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import BasicHead from "../../components/atom/head";
 import TitleLogo from "../../components/atom/logo";
@@ -63,7 +63,7 @@ export default function SettingProfile() {
                     const [url, ] = await getUserImageUrl("userPhoto/default-user-image.png");
                     saveUserdata(user, url);
                 }
-
+                await activeUserExist();
                 router.push("[username]", `${ username }`);
             } else {
                 alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");
@@ -71,6 +71,17 @@ export default function SettingProfile() {
             }
         }
     }
+
+    const checkUserdata = async() => {
+        const user = await getActiveUser();
+        if (user.displayName) {
+            router.push("[username]", `${ user.displayName }`);
+        }
+    }
+
+    useEffect(() => {
+        checkUserdata();
+    }, []);
 
     return (
         <div>

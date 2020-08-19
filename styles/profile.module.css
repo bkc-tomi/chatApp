@@ -13,18 +13,7 @@
     margin: 80px auto;
 }
 
-.container {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    text-align: center;
-}
-
 .search {
     margin: 1rem auto;
 
-}
-
-.username {
-    text-align: center;
 }

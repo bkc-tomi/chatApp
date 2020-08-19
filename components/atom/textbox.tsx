@@ -21,6 +21,7 @@ type TextProps = {
     multiline?: boolean,
     onchange: Function,
     value: string,
+    type?: string,
 }
 
 const BasicTextField:FC<TextProps> = (props) => {
@@ -33,6 +34,7 @@ const BasicTextField:FC<TextProps> = (props) => {
             multiline={ props.multiline }
             onChange={ (event:React.ChangeEvent<{ value: unknown }>) => props.onchange(event) }
             value={ props.value }
+            type={ props.type }
             classes={{
                 root: classes.root,
             }}

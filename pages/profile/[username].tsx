@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 
 import BasicHead from "../../components/atom/head";
 import TitleLogo from "../../components/atom/logo";
-import BasicH2 from "../../components/atom/basicH2";
 import BasicButton from "../../components/atom/button";
 import BasicParagraph from "../../components/atom/basicP";
-import UserIcon from "../../components/atom/userIcon";
 import ContainerDiv from "../../components/atom/containerDiv";
 import SearchBox from "../../components/compo/searchBox";
+import UserField from "../../components/compo/userField";
 
 import Styles from "../../styles/profile.module.css";
 
@@ -52,22 +51,9 @@ export default function Profile() {
                     </ContainerDiv>
                 </div>
 
-                <div className={ Styles.container }>
-                    <div >
-                        <UserIcon
-                            image  ={ user?.photoURL }
-                            alt    ="user icon"
-                            width  ={100}
-                            height ={100}
-                            />
-                    </div>
-
-                    <div className={ Styles.username }>
-                        <BasicH2>
-                            { user?.displayName || "no user" }
-                        </BasicH2>
-                    </div>
-                </div>
+                <UserField 
+                    user={ user }
+                />
             </main>
         </div>
     );
