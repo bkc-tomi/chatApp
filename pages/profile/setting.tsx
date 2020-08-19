@@ -57,9 +57,7 @@ export default function SettingProfile() {
                     const [bool, fullPath] = await saveUserImage(photo, user.uid);
                     if (bool) {
                         const [url, ] = await getUserImageUrl(fullPath);
-                        console.log(url);
                         saveUserdata(user, url);
-                        
                     }
                 } else {
                     const [url, ] = await getUserImageUrl("userPhoto/default-user-image.png");

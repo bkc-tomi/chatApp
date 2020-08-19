@@ -13,7 +13,7 @@ const containerStyles = makeStyles(() => createStyles({
         boxShadow: Shadow.style3,
         boxSizing: "border-box",
     }
-}))
+}));
 
 type ContainerProps = {
     children?: React.ReactNode,

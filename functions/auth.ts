@@ -121,3 +121,15 @@ export const getActiveUser = () => {
     const user = FB.currentUser;
     return user;
 }
+
+
+export const updateUser = async() => {
+    let user:firebase.User;
+    await FB.onAuthStateChanged(usr => {
+        if (usr) {
+            user = usr;
+        }
+        user = null;
+    });
+    return user;
+}
