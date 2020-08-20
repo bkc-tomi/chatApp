@@ -81,7 +81,7 @@ export default function SettingProfile() {
 
     useEffect(() => {
         checkUserdata();
-    }, []);
+    });
 
     return (
         <div>
