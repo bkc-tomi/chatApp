@@ -6,7 +6,7 @@
 .titlePC {
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
     padding: 20px 10px 20px;
     margin: 0 auto;
 }
@@ -36,7 +36,7 @@
 .button {
     display: flex;
     float: left;
-    width: 46%;
+    width: 100%;
     margin: 2%;
 }
 

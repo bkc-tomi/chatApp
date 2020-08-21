@@ -1,0 +1,28 @@
+.title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8%;
+    height: 8%;
+    min-width: 80px;
+    min-height: 80px;
+}
+
+.maincontainer {
+    max-width: 500px;
+    margin: 80px auto;
+}
+
+.search {
+    margin: 1rem auto;
+
+}
+
+.span {
+    height: 10px;
+}
+
+.nouser {
+    text-align: center;
+    margin: 200px auto 0;
+}

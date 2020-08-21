@@ -1,5 +1,5 @@
-import {Button, makeStyles } from "@material-ui/core";
-import { FC } from "react";
+import {Button, makeStyles }  from "@material-ui/core";
+import { FC }                 from "react";
 import { themeColor, Shadow } from "./styles";
 
 const buttonStyles = makeStyles({
@@ -8,7 +8,7 @@ const buttonStyles = makeStyles({
         background: themeColor.bgGrad,
         paddingLeft: "30px",
         paddingRight: "30px",
-        margin: "0px 5px",
+        margin: "0",
         boxShadow: Shadow.style2,
         "&:hover": {
             background: themeColor.bgGrad,
@@ -18,9 +18,10 @@ const buttonStyles = makeStyles({
 })
 
 type BtnProps = {
-    onclick?: Function,
-    children?: React.ReactNode,
+    onclick?:   Function,
+    children?:  React.ReactNode,
     fullWidth?: boolean,
+    disabled?:  boolean,
 }
 
 const BasicButton:FC<BtnProps> = (props) => {
@@ -34,6 +35,7 @@ const BasicButton:FC<BtnProps> = (props) => {
                 classes={{
                     root: classes.root
                 }}
+                disabled={ props.disabled }
             >
                 { props.children }
             </Button>
@@ -48,6 +50,7 @@ const BasicButton:FC<BtnProps> = (props) => {
             classes={{
                 root: classes.root
             }}
+            disabled={ props.disabled }
         >
             { props.children }
         </Button>

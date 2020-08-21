@@ -10,9 +10,10 @@ const containerStyles = makeStyles(() => createStyles({
         borderRadius: "5px",
         margin: "0.5rem",
         background: themeColor.bgWhite,
-        boxShadow: Shadow.style3
+        boxShadow: Shadow.style3,
+        boxSizing: "border-box",
     }
-}))
+}));
 
 type ContainerProps = {
     children?: React.ReactNode,
