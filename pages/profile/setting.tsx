@@ -64,7 +64,7 @@ export default function SettingProfile() {
                     saveUserdata(user, url);
                 }
                 await activeUserExist();
-                router.push("[username]", `${ username }`);
+                router.push("/profile/[username]", `/profile/${ username }`);
             } else {
                 alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");
                 setDisable(false);

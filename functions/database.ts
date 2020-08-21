@@ -1,14 +1,5 @@
 import { FBdb } from "./firebase";
 
-// firestoreから読み込み
-export const getData = async() => {
-    const data = await FBdb.collection("foo").doc("bar").get()
-    .then(result => {
-        return result.data();
-    });
-    return data;
-}
-
 export type ChatType = {
     text:     string,
     date:     string,
@@ -17,7 +8,8 @@ export type ChatType = {
 }
 
 export type ChatroomType = {
-    owner:  string,
+    owner:  string, // username
+    roomname: string,
     member: string[],
     chats:  ChatType[],
 }
@@ -26,13 +18,14 @@ export type ChatroomType = {
  * firestoreにチャットルームを保存する。
  * 保存の成功・失敗ごとにメッセージを返す。
  * @param chatroom :chatroomオブジェクトを指定
+ * @param uid :documentを指定
  */
-export const setChatroomToFirestore = async(chatroom:ChatroomType):Promise<string> => {
-    const doc:string = chatroom.owner;
-    const msg:string = await FBdb.collection("chatrooms").doc(doc).set({
-        owner:  chatroom.owner,
-        member: chatroom.member,
-        chats:  chatroom.chats,
+export const setChatroomToFirestore = async(chatroom:ChatroomType, uid:string):Promise<string> => {
+    const msg:string = await FBdb.collection("chatrooms").doc(uid).set({
+        owner:    chatroom.owner,
+        roomname: chatroom.roomname,
+        member:   chatroom.member,
+        chats:    chatroom.chats,
     })
     .then(() => {
         return "set chatroom successfully!";
@@ -47,16 +40,17 @@ export const setChatroomToFirestore = async(chatroom:ChatroomType):Promise<strin
  * firestoreから指定されたchatroomオブジェクトを取ってくる。
  * 成功したらオブジェクトを返す。
  * 保存の成功・失敗ごとにメッセージを返す。
- * @param doc :username+uidを指定
+ * @param uid :uidを指定
  */
-export const getChatroomFromFirestore = async(doc:string):Promise<[string, any]> => {
+export const getChatroomFromFirestore = async(uid:string):Promise<[string, any]> => {
     let chatroom = {};
-    const msg:string = await FBdb.collection("chatrooms").doc(doc).get()
-    .then(result => {
+    const msg:string = await FBdb.collection("chatrooms").doc(uid).get()
+    .then(snapshot => {
         chatroom = {
-            owner: result.data().owner,
-            member: result.data().member,
-            chats: result.data().chats,
+            owner:    snapshot.data().owner,
+            roomname: snapshot.data().roomname,
+            member:   snapshot.data().member,
+            chats:    snapshot.data().chats,
         }
         return "get chatroom successfully!";
     })
@@ -64,4 +58,28 @@ export const getChatroomFromFirestore = async(doc:string):Promise<[string, any]>
         return "get chatroom failed.";
     });
     return [msg, chatroom];
+}
+
+export const getChatroomListWithUsername = async(username:string):Promise<any[]> => {
+    let roomList = [];
+    await FBdb.collection("chatrooms").where("owner", "==", username).get()
+    .then(snapshot => {
+        if (snapshot.empty) {
+            console.log('No matching documents.');
+            return;
+        }
+    
+        snapshot.forEach(doc => {
+            // console.log(doc.id, '=>', doc.data());
+            const room = {
+                id: doc.id,
+                owner: doc.data().owner,
+            }
+            roomList.push(room);
+        });
+    })
+    .catch(error => {
+        console.log(error);
+    });
+    return roomList;
 }

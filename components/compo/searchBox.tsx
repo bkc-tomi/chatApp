@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
+import { useRouter } from "next/router";
+import BasicParagraph from "../atom/basicP";
 import BasicTextField from "../atom/textbox";
 import BasicButton from "../atom/button";
 import { makeStyles, createStyles } from "@material-ui/core";
-import { themeColor } from "../atom/styles";
+import { getChatroomListWithUsername } from "../../functions/database";
 
 const useStyles = makeStyles(() => createStyles({
     container: {
@@ -20,27 +22,60 @@ const useStyles = makeStyles(() => createStyles({
         width: "30%",
         textAlign: "center",
         top: "18px",
+    },
+    ulStyle: {
+        listStyle: "none",
+        padding: "0",
     }
 }));
 
 const SearchBox:FC = () => {
     const classes = useStyles();
-    const [word, setWord] = useState("");
+    const router  = useRouter();
+
+    const [searchWord, setSearchWord] = useState("");
+    const [rooms, setRooms] = useState([]);
 
     const handleChangeWord = (event:React.ChangeEvent<{ value: unknown }>) => {
-        setWord(event.target.value as string);
+        setSearchWord(event.target.value as string);
     }
 
-    // 検索ワードを元に部分一致するチャットルームをfirebaseから検索して表示する関数
-    const searchRoomFromFirebase = () => {
-        alert("searching");
+    const searchChatroom = async() => {
+        const roomList = await getChatroomListWithUsername(searchWord);
+        setRooms(roomList);
+    }
+
+    const searchResult = () => {
+        if (rooms.length === 0) {
+            return (
+                <ul className={ classes.ulStyle }>
+                    <li>ルームなし</li>
+                </ul>
+            );
+        }
+        return (
+            <ul className={ classes.ulStyle }>
+                { rooms.map((room, index) => {
+                    return (
+                        <li key={ index }>
+                            <BasicButton
+                                fullWidth={ true }
+                                onclick={() => router.push("/chatroom/[roomid]", `/chatroom/${room.id}`) }
+                            >
+                                { room.owner　+ ": " + room.id }
+                            </BasicButton>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     }
     return (
         <div className={ classes.container }>
             <div className={classes.textfield }>
                 <BasicTextField
                     label="チャットルームを検索"
-                    value={ word }
+                    value={ searchWord }
                     onchange={ handleChangeWord }
                     fullWidth={ true }
                 />
@@ -49,11 +84,16 @@ const SearchBox:FC = () => {
             <div className={ classes.btnBox }>
                 <div>
                     <BasicButton
-                        onclick={ searchRoomFromFirebase }
+                        onclick={ searchChatroom }
                     >
                         検索
                     </BasicButton>
                 </div>
+            </div>
+            <div>
+                <br />
+                <BasicParagraph>検索結果</BasicParagraph>
+                { searchResult() }
             </div>
         </div>
     );
