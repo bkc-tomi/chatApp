@@ -60,6 +60,11 @@ export const getChatroomFromFirestore = async(uid:string):Promise<[string, any]>
     return [msg, chatroom];
 }
 
+/**
+ * firestoreからownerが指定されたusernameのdocument(chatroom)を全て取得する。
+ * 取得したチャットルームを配列にして返す。
+ * @param username 
+ */
 export const getChatroomListWithUsername = async(username:string):Promise<any[]> => {
     let roomList = [];
     await FBdb.collection("chatrooms").where("owner", "==", username).get()

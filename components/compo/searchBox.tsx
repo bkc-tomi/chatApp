@@ -70,6 +70,7 @@ const SearchBox:FC = () => {
             </ul>
         );
     }
+    
     return (
         <div className={ classes.container }>
             <div className={classes.textfield }>
