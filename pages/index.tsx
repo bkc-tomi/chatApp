@@ -31,14 +31,6 @@ export default function Home() {
                         </BasicParagraph>
                     </div>
                     <div className={ styles.buttonArea }>
-                        <Tooltip title={ basicData.signup }>
-                            <div className={ styles.button }>
-                                    <BasicButton
-                                        fullWidth ={ true }
-                                        onclick   ={() => router.push("/signup")}
-                                    >登録</BasicButton>
-                            </div>
-                        </Tooltip>
                         <Tooltip title={ basicData.signin }>
                             <div className={ styles.button }>
                                 <BasicButton
@@ -63,14 +55,6 @@ export default function Home() {
                         </BasicParagraph>
                     </div>
                     <div className={ styles.buttonArea }>
-                        <Tooltip title={ basicData.signup }>
-                            <div className={ styles.button }>
-                                    <BasicButton
-                                        fullWidth ={ true }
-                                        onclick   ={() => router.push("/signup")}
-                                    >登録</BasicButton>
-                            </div>
-                        </Tooltip>
                         <Tooltip title={ basicData.signin }>
                             <div className={ styles.button }>
                                 <BasicButton

@@ -5,7 +5,7 @@ import { createStyles, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => createStyles({
     container: {
-        position: "absolute",
+        position: "fixed",
         bottom: "10px",
         right: "10px",
         textAlign: "center",
@@ -30,7 +30,7 @@ const UserField:FC<UF> = ({
         <div className={ classes.container }>
             <div >
                 <UserIcon
-                    image  ={ user?.photoURL }
+                    image  ={ user?.photoURL || "/static/default-user-image.png" }
                     alt    ="user icon"
                     width  ={ width }
                     height ={ height }

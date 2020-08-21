@@ -2,9 +2,9 @@ import { FBstorage } from "./firebase";
 
 export const saveUserImage = async(image, uid:string):Promise<[boolean, string]> => {
     const fullPath = "userPhoto/" + uid + image.name;
-    const userImageRef = FBstorage.ref().child(fullPath);
+    const ImageRef = FBstorage.ref().child(fullPath);
     let bool:boolean;
-    await userImageRef.put(image)
+    await ImageRef.put(image)
     .then(() => {
         bool = true;
     })
@@ -24,4 +24,24 @@ export const getUserImageUrl = async(imagePath:string):Promise<[any, boolean]> =
         bool = true;
     });
     return [Url, bool]
+}
+
+/**
+ * 取得したパスの画像をfire storageから削除する。
+ * 成功したらtrue, 失敗したらfalseを返す。
+ * @param imagePath 
+ */
+export const deleteUserImage = async(imagePath:string):Promise<boolean> => {
+    const ImageRef = FBstorage.ref().child(imagePath);
+
+    let bool:boolean = false;
+    ImageRef.delete()
+    .then(() => {
+        bool = true;
+    })
+    .catch(error => {
+        console.log(error);
+        bool = false;
+    });
+    return bool;
 }

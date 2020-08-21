@@ -88,3 +88,21 @@ export const getChatroomListWithUsername = async(username:string):Promise<any[]>
     });
     return roomList;
 }
+
+/**
+ * 指定したuidのdocumentを削除する。
+ * 成功したらtrue, 失敗したらfalseを返す。
+ * @param uid 
+ */
+export const deleteFirestoreChatroom = async(uid:string):Promise<boolean> => {
+    let bool:boolean = false;
+    await FBdb.collection("chatrooms").doc(uid).delete()
+    .then(() => {
+        bool = true;
+    })
+    .catch(error => {
+        console.log(error);
+        bool = false;
+    });
+    return bool;
+}

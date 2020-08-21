@@ -60,8 +60,7 @@ export default function SettingProfile() {
                         saveUserdata(user, url);
                     }
                 } else {
-                    const [url, ] = await getUserImageUrl("userPhoto/default-user-image.png");
-                    saveUserdata(user, url);
+                    saveUserdata(user, "");
                 }
                 await activeUserExist();
                 router.push("/profile/[username]", `/profile/${ username }`);
@@ -73,9 +72,11 @@ export default function SettingProfile() {
     }
 
     const checkUserdata = async() => {
-        const user = await getActiveUser();
-        if (user.displayName) {
-            router.push("[username]", `${ user.displayName }`);
+        if (await activeUserExist()) {
+            const user = await getActiveUser();
+            if (user.displayName) {
+                router.push("[username]", `${ user.displayName }`);
+            }
         }
     }
 

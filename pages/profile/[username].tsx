@@ -7,6 +7,8 @@ import BasicParagraph from "../../components/atom/basicP";
 import ContainerDiv from "../../components/atom/containerDiv";
 import SearchBox from "../../components/compo/searchBox";
 import UserField from "../../components/compo/userField";
+import SignoutButton from "../../components/compo/signoutButton";
+import NoUser from "../../components/compo/nouser";
 
 import Styles from "../../styles/profile.module.css";
 
@@ -86,43 +88,50 @@ export default function Profile() {
             await getChatroom();
             await getUserData();
         })();
-        console.log("set user, set room");
     }, [setUser, setRoomExist]);
 
+    if (user) {
+        return (
+            <div>
+                <BasicHead />
+                <main>
+                    <div className={ Styles.title }>
+                        <TitleLogo />
+                    </div>
+
+                    <div　className={ Styles.maincontainer }>
+                        <ContainerDiv>
+                                { createRoomBtn() }
+                                <div className={ Styles.span }></div>
+                                <BasicButton
+                                    fullWidth ={ true }
+                                    disabled  ={ !roomExist }
+                                    onclick   ={() => router.push("/chatroom/[roomid]", `/chatroom/${user.uid}`) }
+                                >
+                                    自分のチャットルームへ
+                                </BasicButton>
+
+                                <div className={ Styles.search }>
+                                    <BasicParagraph>
+                                        他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
+                                    </BasicParagraph>
+                                    <SearchBox />
+                                </div>
+                        </ContainerDiv>
+                    </div>
+
+                    <UserField 
+                        user={ user }
+                    />
+                </main>
+                <SignoutButton />
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <BasicHead />
-            <main>
-                <div className={ Styles.title }>
-                    <TitleLogo />
-                </div>
-
-                <div　className={ Styles.maincontainer }>
-                    <ContainerDiv>
-                            { createRoomBtn() }
-                            <div className={ Styles.span }></div>
-                            <BasicButton
-                                fullWidth ={ true }
-                                disabled  ={ !roomExist }
-                                onclick   ={() => router.push("/chatroom/[roomid]", `/chatroom/${user.uid}`) }
-                            >
-                                自分のチャットルームへ
-                            </BasicButton>
-
-                            <div className={ Styles.search }>
-                                <BasicParagraph>
-                                    他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
-                                </BasicParagraph>
-                                <SearchBox />
-                            </div>
-                    </ContainerDiv>
-                </div>
-
-                <UserField 
-                    user={ user }
-                />
-            </main>
+        <div className={ Styles.nouser }>
+            <NoUser />
         </div>
     );
 }
