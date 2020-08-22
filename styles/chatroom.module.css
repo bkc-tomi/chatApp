@@ -1,0 +1,43 @@
+.title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8%;
+    height: 8%;
+    min-width: 80px;
+    min-height: 80px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+.toProfile {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.area {
+    width: 100%;
+}
+
+.chatarea {
+    position: relative;
+    width: 98%;
+    max-width: 800px;
+    margin: 80px auto 200px;
+    background: linear-gradient(to right, #0066ff, #0033dd);
+    border-radius: 7px;
+    padding: 0.5px 0.5px;
+}
+
+.chatareaInner {
+    width: calc(100% - 1px);
+    margin: 0.5px 0.5px;
+    background: #ffffff;
+    border-radius: 7px;
+    text-align: center;
+}

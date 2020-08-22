@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import BasicHead from "../../components/atom/head";
-import TitleLogo from "../../components/atom/logo";
-import BasicH2 from "../../components/atom/basicH2";
-import BasicParagraph from "../../components/atom/basicP";
-import BasicTextField from "../../components/atom/textbox";
-import BasicButton from "../../components/atom/button";
-import ContainerDiv from "../../components/atom/containerDiv";
+import BasicHead from "../../../components/atom/head";
+import TitleLogo from "../../../components/atom/logo";
+import BasicH2 from "../../../components/atom/basicH2";
+import BasicParagraph from "../../../components/atom/basicP";
+import BasicTextField from "../../../components/atom/textbox";
+import BasicButton from "../../../components/atom/button";
+import ContainerDiv from "../../../components/atom/containerDiv";
 
-import { activeUserExist, getActiveUser } from "../../functions/auth";
-import { validationUsername } from "../../functions/validation";
-import { saveUserImage, getUserImageUrl } from "../../functions/storage";
+import { activeUserExist, getActiveUser, signinAnonymous } from "../../../functions/auth";
+import { validationUsername } from "../../../functions/validation";
+import { saveUserImage, getUserImageUrl } from "../../../functions/storage";
 
-import Styles from "../../styles/setting.module.css";
+import Styles from "../../../styles/setting.module.css";
 
 export default function SettingProfile() {
     const router = useRouter();
@@ -51,39 +51,32 @@ export default function SettingProfile() {
     const handleSaveUserData = async() => {
         if (UMessage[0] === "OK!!") {
             setDisable(true);
-            if (await activeUserExist()) {
-                const user = await getActiveUser();
-                if (photo) {
-                    const [bool, fullPath] = await saveUserImage(photo, user.uid);
-                    if (bool) {
-                        const [url, ] = await getUserImageUrl(fullPath);
-                        saveUserdata(user, url);
+            const bool = await signinAnonymous();
+            if (bool) {
+                if (await activeUserExist()) {
+                    const user = await getActiveUser();
+                    if (photo) {
+                        const [bool, fullPath] = await saveUserImage(photo, user.uid);
+                        if (bool) {
+                            const [url, ] = await getUserImageUrl(fullPath);
+                            saveUserdata(user, url);
+                        }
+                    } else {
+                        saveUserdata(user, "");
                     }
+                    await activeUserExist();
+                    const path = location.pathname.split("/setting")[0]
+                    router.push("/chatroom/[roomid]", path);
                 } else {
-                    saveUserdata(user, "");
+                    alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");
+                    setDisable(false);
                 }
-                await activeUserExist();
-                router.push("/profile/[username]", `/profile/${ username }`);
             } else {
                 alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");
                 setDisable(false);
-                router.push("/signin");
             }
         }
     }
-
-    const checkUserdata = async() => {
-        if (await activeUserExist()) {
-            const user = await getActiveUser();
-            if (user.displayName) {
-                router.push("[username]", `${ user.displayName }`);
-            }
-        }
-    }
-
-    useEffect(() => {
-        checkUserdata();
-    });
 
     return (
         <div>

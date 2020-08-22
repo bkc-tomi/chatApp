@@ -29,29 +29,28 @@ const SignoutButton:FC = () => {
     }
 
     const handleSignout = async() => {
-        const user = getActiveUser();
-        // チャットルームの削除
-        const chatroomb = await deleteFirestoreChatroom(user.uid);
-        // ユーザアイコンの削除
-        const photoURL = user.photoURL;
-        if (photoURL) {
-            const imagePath = slicePhotoURL(photoURL);
-            console.log(imagePath);
-            const userImageb = await deleteUserImage(imagePath);
+        const result:boolean = window.confirm("ログアウトするとこのアカウントに関わる情報は削除されます。よろしいですか？");
+        if (result) {
+            const user = getActiveUser();
+            // チャットルームの削除
+            const chatroomb = await deleteFirestoreChatroom(user.uid);
+            // ユーザアイコンの削除
+            const photoURL = user.photoURL;
+            if (photoURL) {
+                const imagePath = slicePhotoURL(photoURL);
+                console.log(imagePath);
+                const userImageb = await deleteUserImage(imagePath);
+            }
+            // ユーザアカウントの削除
+            user.delete()
+            .then(() => {
+                router.push("/");
+            })
+            .catch(error => {
+                console.log(error);
+                router.push("/");
+            })
         }
-        
-        user.delete()
-        .then(() => {
-            router.push("/");
-        })
-        .catch(error => {
-            console.log(error);
-            router.push("/");
-        })
-        /**
-
-         * userIDの削除とログアウト
-         */
     }
     return (
         <div className={ classes.pos }>
