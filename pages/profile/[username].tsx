@@ -45,10 +45,10 @@ export default function Profile() {
     const createChatroom = async() => {
         const owner:string = user.displayName;
         const chatroom:ChatroomType = {
-            owner:  owner,
+            owner:    owner,
             roomname: "",
-            member: [],
-            chats:  [],
+            member:   [],
+            chats:    [],
         }
         const msg = await setChatroomToFirestore(chatroom, user.uid);
         console.log(msg);
