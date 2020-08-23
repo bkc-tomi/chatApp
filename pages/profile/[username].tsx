@@ -44,11 +44,27 @@ export default function Profile() {
 
     const createChatroom = async() => {
         const owner:string = user.displayName;
+        const date = Date.now();
         const chatroom:ChatroomType = {
             owner:  owner,
             roomname: "",
             member: [],
-            chats:  [],
+            chats:  [
+                {
+                    text: "こんにちは！ここがチャットエリアだよ！下のテキストボックスからここに書き込んでね！",
+                    date: date,
+                    uid : "chat-bot",
+                    username: "chat-bot",
+                    photoURL: "",
+                },
+                {
+                    text: "了解したよ！",
+                    date: date,
+                    uid : user.uid,
+                    username: user.displayName,
+                    photoURL: user.photoURL,
+                }
+            ],
         }
         const msg = await setChatroomToFirestore(chatroom, user.uid);
         console.log(msg);

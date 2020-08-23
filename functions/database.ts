@@ -2,7 +2,8 @@ import { FBdb } from "./firebase";
 
 export type ChatType = {
     text:     string,
-    date:     string,
+    date:     number,
+    uid:      string,
     username: string,
     photoURL: string,
 }

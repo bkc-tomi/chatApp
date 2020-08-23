@@ -26,7 +26,7 @@ const UserIcon:FC<imageType> = ({
     return (
         <div className={ classes.container }>
             <img 
-                src={ image || "/images/default-user-image.png" } 
+                src={ image || "/static/default-user-image.png" } 
                 alt={ alt}
                 className={ classes.image }
                 style={{ width: width, height: height}}
