@@ -51,7 +51,7 @@ export default function Profile() {
             member: [],
             chats:  [
                 {
-                    text: "こんにちは！ここがチャットエリアだよ！下のテキストボックスからここに書き込んでね！",
+                    text: `ここは、${ user.displayName }のチャットルームだよ！下のフォームから投稿してね！`,
                     date: date,
                     uid : "chat-bot",
                     username: "chat-bot",
@@ -101,8 +101,8 @@ export default function Profile() {
 
     useEffect(() => {
         (async() => {
-            await getChatroom();
             await getUserData();
+            await getChatroom();
         })();
     }, [setUser, setRoomExist]);
 
