@@ -1,4 +1,4 @@
-import { FBdb } from "./firebase";
+import FB, { FBdb } from "./firebase";
 
 export type ChatType = {
     text:     string,
@@ -91,6 +91,35 @@ export const getChatroomListWithUsername = async(username:string):Promise<any[]>
 }
 
 /**
+ * firestoreの更新に合わせて更新したデータを読み取る。
+ * @param doc
+ */
+export const updateRoom = (doc:string) => {
+    let room:ChatroomType;
+    const chatsRef = FBdb.collection("chatrooms").doc(doc);
+    chatsRef.onSnapshot(snapshot => {
+        room = snapshot.data() as ChatroomType;
+    }, error => {
+        console.log(error);
+    });
+    return room;
+}
+
+/**
+ * 
+ * @param uid 
+ */
+export const updateChats = (uid: string) => {
+    FBdb.collection("chatrooms").where("document", "==", uid)
+    .onSnapshot(ss => {
+        ss.docChanges().forEach(s => {
+            console.log(s.doc.data());
+        })
+    });
+    console.log("do function.")
+}
+
+/**
  * 指定したuidのdocumentを削除する。
  * 成功したらtrue, 失敗したらfalseを返す。
  * @param uid 
@@ -98,6 +127,27 @@ export const getChatroomListWithUsername = async(username:string):Promise<any[]>
 export const deleteFirestoreChatroom = async(uid:string):Promise<boolean> => {
     let bool:boolean = false;
     await FBdb.collection("chatrooms").doc(uid).delete()
+    .then(() => {
+        bool = true;
+    })
+    .catch(error => {
+        console.log(error);
+        bool = false;
+    });
+    return bool;
+}
+
+/**
+ * 
+ * @param uid 
+ * @param chat 
+ */
+export const setChatToFirestore = async(uid:string, chat:ChatType):Promise<boolean> => {
+    let bool:boolean = false;
+    const chatroom = FBdb.collection("chatrooms").doc(uid);
+    await chatroom.update({
+        chats: FB.firestore.FieldValue.arrayUnion(chat),
+    })
     .then(() => {
         bool = true;
     })

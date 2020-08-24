@@ -23,12 +23,13 @@ const ChatContainer:FC<Props> = ({ chats, user }) => {
     const classes = useStyles();
     return (
         <div className={ classes.container }>
-            { chats.map(chat => {
+            { chats.map((chat, index) => {
                 if (chat.uid === user) {
                     return (
                         <ChatBalloon 
                             chat ={ chat }
                             who  ={ "me" }
+                            key  ={ index }
                         />
                     );
                 } else {
@@ -36,6 +37,7 @@ const ChatContainer:FC<Props> = ({ chats, user }) => {
                         <ChatBalloon
                             chat ={ chat }
                             who  ={ "you" }
+                            key  ={ index }
                         />
                     );
                 }

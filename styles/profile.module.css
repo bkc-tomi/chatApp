@@ -26,3 +26,9 @@
     text-align: center;
     margin: 200px auto 0;
 }
+
+.userField {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}

@@ -1,9 +1,9 @@
 import '../styles/globals.css'
-import FB from "../functions/firebase";
+import FB, { FBdb } from "../functions/firebase";
 
 function MyApp({ Component, pageProps }) {
   (async() => {
-    await FB.onAuthStateChanged(user => {
+    await FB.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("true");
       } else {

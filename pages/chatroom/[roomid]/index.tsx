@@ -7,11 +7,13 @@ import BasicButton from "../../../components/atom/button";
 import BasicH2 from "../../../components/atom/basicH2";
 import UserField from "../../../components/compo/userField";
 import ChatContainer from "../../../components/compo/chatContainer";
+import ChatForm from "../../../components/compo/chatform";
 
 import Styles from "../../../styles/chatroom.module.css";
 
 import { activeUserExist, getActiveUser } from "../../../functions/auth";
 import { getChatroomFromFirestore, ChatroomType } from "../../../functions/database";
+import { scrollBottom } from "../../../functions/window";
 
 export default function Room() {
     const [ user, setUser] = useState<firebase.User>();
@@ -30,20 +32,17 @@ export default function Room() {
     // roomの存在を確認
     const checkroom = async() => {
         const path = location.pathname.split("/chatroom/")[1];
-        console.log(path);
         const [msg, rm] = await getChatroomFromFirestore(path);
-
         if (msg === "get chatroom successfully!") {
             setRoom(rm);
-            console.log(rm);
-        }
+        }      
     }
 
     useEffect(() => {
         (async() => {
             await checkUser();
             await checkroom();
-            console.log("checked");
+            scrollBottom();     
         })();
     }, []);
 
@@ -114,10 +113,18 @@ export default function Room() {
                     { chatArea() }
                 </div>
 
-                <div className={ Styles.userField }>
-                    <UserField
-                        user={ user }
-                    />
+                <div className={ Styles.userArea }>
+                    <div className={ Styles.chatform }>
+                        <ChatForm 
+                            roomid={ location.pathname.split("/chatroom/")[1] }
+                            user={ user }
+                        />
+                    </div>
+                    <div className={ Styles.userField }>
+                        <UserField
+                            user={ user }
+                        />
+                    </div>
                 </div>
             </main>
         </div>

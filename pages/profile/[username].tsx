@@ -102,9 +102,14 @@ export default function Profile() {
     useEffect(() => {
         (async() => {
             await getUserData();
+        })();
+    }, [setUser]);
+
+    useEffect(() => {
+        (async() => {
             await getChatroom();
         })();
-    }, [setUser, setRoomExist]);
+    }, [setRoomExist]);
 
     if (user) {
         return (
@@ -135,10 +140,11 @@ export default function Profile() {
                                 </div>
                         </ContainerDiv>
                     </div>
-
-                    <UserField 
-                        user={ user }
-                    />
+                    <div className={ Styles.userField }>
+                        <UserField 
+                            user={ user }
+                        />
+                    </div>
                 </main>
                 <SignoutButton />
             </div>
