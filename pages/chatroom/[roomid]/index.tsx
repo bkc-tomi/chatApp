@@ -14,6 +14,7 @@ import Styles from "../../../styles/chatroom.module.css";
 import { activeUserExist, getActiveUser } from "../../../functions/auth";
 import { getChatroomFromFirestore, ChatroomType } from "../../../functions/database";
 import { scrollBottom } from "../../../functions/window";
+import { FBdb } from "../../../functions/firebase";
 
 export default function Room() {
     const [ user, setUser] = useState<firebase.User>();
@@ -38,6 +39,22 @@ export default function Room() {
         }      
     }
 
+    const updateRoom = (room: ChatroomType) => {
+        setRoom(room);
+    }
+
+    useEffect(() => {
+        const path = location.pathname.split("/chatroom/")[1];
+        const unsubscribe = FBdb.collection("chatrooms").doc(path)
+        .onSnapshot(snapshots => {
+            updateRoom(snapshots.data() as ChatroomType);
+            scrollBottom(); 
+        }, error => {
+            console.log(error);
+        });
+        return () => unsubscribe();
+    }, []);
+
     useEffect(() => {
         (async() => {
             await checkUser();
@@ -59,6 +76,7 @@ export default function Room() {
                                 <ChatContainer
                                     chats={ room.chats }
                                     user={ user.uid }
+                                    roomid={ location.pathname.split("/chatroom/")[1] }
                                 />
                             </div>
                         </div>

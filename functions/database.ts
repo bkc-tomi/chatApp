@@ -91,35 +91,6 @@ export const getChatroomListWithUsername = async(username:string):Promise<any[]>
 }
 
 /**
- * firestoreの更新に合わせて更新したデータを読み取る。
- * @param doc
- */
-export const updateRoom = (doc:string) => {
-    let room:ChatroomType;
-    const chatsRef = FBdb.collection("chatrooms").doc(doc);
-    chatsRef.onSnapshot(snapshot => {
-        room = snapshot.data() as ChatroomType;
-    }, error => {
-        console.log(error);
-    });
-    return room;
-}
-
-/**
- * 
- * @param uid 
- */
-export const updateChats = (uid: string) => {
-    FBdb.collection("chatrooms").where("document", "==", uid)
-    .onSnapshot(ss => {
-        ss.docChanges().forEach(s => {
-            console.log(s.doc.data());
-        })
-    });
-    console.log("do function.")
-}
-
-/**
  * 指定したuidのdocumentを削除する。
  * 成功したらtrue, 失敗したらfalseを返す。
  * @param uid 

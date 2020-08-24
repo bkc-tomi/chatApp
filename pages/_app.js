@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import FB, { FBdb } from "../functions/firebase";
+import FB from "../functions/firebase";
 
 function MyApp({ Component, pageProps }) {
   (async() => {

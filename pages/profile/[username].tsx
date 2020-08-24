@@ -55,15 +55,8 @@ export default function Profile() {
                     date: date,
                     uid : "chat-bot",
                     username: "chat-bot",
-                    photoURL: "",
+                    photoURL: "/static/chat-bot.png",
                 },
-                {
-                    text: "了解したよ！",
-                    date: date,
-                    uid : user.uid,
-                    username: user.displayName,
-                    photoURL: user.photoURL,
-                }
             ],
         }
         const msg = await setChatroomToFirestore(chatroom, user.uid);
