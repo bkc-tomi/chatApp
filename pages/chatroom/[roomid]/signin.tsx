@@ -65,7 +65,8 @@ export default function SettingProfile() {
                         saveUserdata(user, "");
                     }
                     await activeUserExist();
-                    const path = location.pathname.split("/setting")[0]
+                    const path = location.pathname.split("/signin")[0];
+                    console.log(path);
                     router.push("/chatroom/[roomid]", path);
                 } else {
                     alert("不具合でログインしていない状態になっているようです。もう一度登録処理からお願いします。");

@@ -116,16 +116,18 @@ export default function Room() {
         <div>
             <BasicHead />
             <main>
-                <div className={ Styles.title }>
-                    <TitleLogo />
-                </div>
+                <div className={ Styles.topbg }>
+                    <div className={ Styles.title }>
+                        <TitleLogo />
+                    </div>
 
-                <div className={ Styles.toProfile }>
-                    <BasicButton
-                        onclick={ () => router.push("/profile/[username]", "/profile/" + user.displayName) }
-                    >
-                        プロフィールページへ
-                    </BasicButton>
+                    <div className={ Styles.toProfile }>
+                        <BasicButton
+                            onclick={ () => router.push("/profile/[username]", "/profile/" + user.displayName) }
+                        >
+                            プロフィールページへ
+                        </BasicButton>
+                    </div>
                 </div>
                 <div className={ Styles.area }>
                     { chatArea() }
