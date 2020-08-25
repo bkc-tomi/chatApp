@@ -33,8 +33,6 @@ export default function Profile() {
             const usr = getActiveUser();
             const [msg, temp] = await getChatroomFromFirestore(usr.uid);
             if (msg === "get chatroom successfully!") {
-                // ボタンを表示するcssクラスを付与
-                console.log(msg);
                 setRoomExist(true);
             } else {
                 setRoomExist(false);
@@ -64,7 +62,6 @@ export default function Profile() {
 
         const [getmsg, temp] = await getChatroomFromFirestore(user.uid);
         if (getmsg === "get chatroom successfully!") {
-            // ボタンを表示するcssクラスを付与
             setRoomExist(true);
         } else {
             setRoomExist(false);
@@ -94,13 +91,8 @@ export default function Profile() {
 
     useEffect(() => {
         (async() => {
-            await getUserData();
-        })();
-    }, [setUser]);
-
-    useEffect(() => {
-        (async() => {
             await getChatroom();
+            await getUserData();
         })();
     }, [setRoomExist]);
 
