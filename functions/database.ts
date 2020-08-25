@@ -109,7 +109,7 @@ export const deleteFirestoreChatroom = async(uid:string):Promise<boolean> => {
 }
 
 /**
- * 
+ * userrooms/uid/chats[]にchatを追加する。
  * @param uid 
  * @param chat 
  */
