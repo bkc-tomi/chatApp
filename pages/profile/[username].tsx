@@ -45,7 +45,7 @@ export default function Profile() {
         const owner:string = user.displayName;
         const date = Date.now();
         const chatroom:ChatroomType = {
-            owner:  owner,
+            owner:    owner,
             roomname: "",
             member: [],
             chats:  [
