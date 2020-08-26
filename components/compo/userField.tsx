@@ -1,15 +1,11 @@
 import { FC } from "react";
 import UserIcon from "../atom/userIcon";
-import BasicH2 from "../atom/basicH2";
+import BasicParagraph from "../atom/basicP";
 import { createStyles, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => createStyles({
     container: {
-        position: "fixed",
-        bottom: "10px",
-        right: "10px",
         textAlign: "center",
-        zIndex: 10000,
     },
     username: {
         textAlign: "center",
@@ -38,9 +34,9 @@ const UserField:FC<UF> = ({
             </div>
 
             <div className={ classes.username }>
-                <BasicH2>
+                <BasicParagraph>
                     { user?.displayName || "no user" }
-                </BasicH2>
+                </BasicParagraph>
             </div>
         </div>
     );

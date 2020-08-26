@@ -22,6 +22,8 @@ type TextProps = {
     onchange: Function,
     value: string,
     type?: string,
+    rows?: number,
+    variant?: "filled" | "outlined",
 }
 
 const BasicTextField:FC<TextProps> = (props) => {
@@ -35,6 +37,8 @@ const BasicTextField:FC<TextProps> = (props) => {
             onChange={ (event:React.ChangeEvent<{ value: unknown }>) => props.onchange(event) }
             value={ props.value }
             type={ props.type }
+            rows={ props.rows || 1 }
+            variant={ props.variant || "standard" }
             classes={{
                 root: classes.root,
             }}

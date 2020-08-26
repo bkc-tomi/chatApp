@@ -1,8 +1,9 @@
-import { FBdb } from "./firebase";
+import FB, { FBdb } from "./firebase";
 
 export type ChatType = {
     text:     string,
-    date:     string,
+    date:     number,
+    uid:      string,
     username: string,
     photoURL: string,
 }
@@ -97,6 +98,27 @@ export const getChatroomListWithUsername = async(username:string):Promise<any[]>
 export const deleteFirestoreChatroom = async(uid:string):Promise<boolean> => {
     let bool:boolean = false;
     await FBdb.collection("chatrooms").doc(uid).delete()
+    .then(() => {
+        bool = true;
+    })
+    .catch(error => {
+        console.log(error);
+        bool = false;
+    });
+    return bool;
+}
+
+/**
+ * userrooms/uid/chats[]にchatを追加する。
+ * @param uid 
+ * @param chat 
+ */
+export const setChatToFirestore = async(uid:string, chat:ChatType):Promise<boolean> => {
+    let bool:boolean = false;
+    const chatroom = FBdb.collection("chatrooms").doc(uid);
+    await chatroom.update({
+        chats: FB.firestore.FieldValue.arrayUnion(chat),
+    })
     .then(() => {
         bool = true;
     })

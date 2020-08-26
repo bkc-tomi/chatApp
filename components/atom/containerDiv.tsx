@@ -8,7 +8,7 @@ const containerStyles = makeStyles(() => createStyles({
         display: "inline-block",
         padding: "0.5rem",
         borderRadius: "5px",
-        margin: "0.5rem",
+        margin: "0rem",
         background: themeColor.bgWhite,
         boxShadow: Shadow.style3,
         boxSizing: "border-box",
@@ -17,12 +17,25 @@ const containerStyles = makeStyles(() => createStyles({
 
 type ContainerProps = {
     children?: React.ReactNode,
+    fullwidth?: boolean,
 }
 
 const ContainerDiv:FC<ContainerProps> = (props) => {
     const classes = containerStyles();
+    if (props.fullwidth) {
+        return (
+            <div 
+                className={ classes.container }
+                style={{ width: "100%" }}
+            >
+                { props.children }
+            </div>
+        );
+    }
     return (
-        <div className={ classes.container }>
+        <div 
+            className={ classes.container }
+        >
             { props.children }
         </div>
     );

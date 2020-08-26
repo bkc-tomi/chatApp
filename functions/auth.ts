@@ -8,7 +8,7 @@ import FB, { googleProvider, twitterProvider } from "./firebase";
  */
 export const signupUser = async(email:string, password:string):Promise<boolean> => {
     console.log(FB);
-    const bool:boolean = await FB.createUserWithEmailAndPassword(email, password)
+    const bool:boolean = await FB.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
         return true;
     })
@@ -26,7 +26,7 @@ export const signupUser = async(email:string, password:string):Promise<boolean> 
  * @param password 
  */
 export const signinUser = async(email:string, password:string):Promise<boolean> => {
-    const bool:boolean = await FB.signInWithEmailAndPassword(email, password)
+    const bool:boolean = await FB.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
         return true;
     })
@@ -42,7 +42,7 @@ export const signinUser = async(email:string, password:string):Promise<boolean> 
  * 成功したらtrue, 失敗したらfalseを返す。
  */
 export const signinAnonymous = async():Promise<boolean> => {
-    const bool:boolean = await FB.signInAnonymously()
+    const bool:boolean = await FB.auth().signInAnonymously()
     .then(() => {
         return true;
     })
@@ -58,7 +58,7 @@ export const signinAnonymous = async():Promise<boolean> => {
  * 成功したらtrue, 失敗したらfalseを返す。
  */
 export const signinWithGoogle = async():Promise<boolean> => {
-    const bool:boolean = await FB.signInWithPopup(googleProvider)
+    const bool:boolean = await FB.auth().signInWithPopup(googleProvider)
     .then(() => {
         return true;
     })
@@ -74,7 +74,7 @@ export const signinWithGoogle = async():Promise<boolean> => {
  * 成功したらtrue, 失敗したらfalseを返す。
  */
 export const signinWithTwitter = async():Promise<boolean> => {
-    const bool:boolean = await FB.signInWithPopup(twitterProvider)
+    const bool:boolean = await FB.auth().signInWithPopup(twitterProvider)
     .then(() => {
         return true;
     })
@@ -90,7 +90,7 @@ export const signinWithTwitter = async():Promise<boolean> => {
  * 成功したらtrue, 失敗したらfalseを返す。
  */
 export const signout = async():Promise<boolean> => {
-    const bool:boolean = await FB.signOut()
+    const bool:boolean = await FB.auth().signOut()
     .then(() => {
         return true;
     })
@@ -107,7 +107,7 @@ export const signout = async():Promise<boolean> => {
  */
 export const activeUserExist = async() => {
     let bool:boolean;
-    await FB.onAuthStateChanged((user) => {
+    await FB.auth().onAuthStateChanged((user) => {
         if (user) {
             bool = true;
         } else {
@@ -118,14 +118,14 @@ export const activeUserExist = async() => {
 }
 
 export const getActiveUser = () => {
-    const user = FB.currentUser;
+    const user = FB.auth().currentUser;
     return user;
 }
 
 
 export const updateUser = async() => {
     let user:firebase.User;
-    await FB.onAuthStateChanged(usr => {
+    await FB.auth().onAuthStateChanged(usr => {
         if (usr) {
             user = usr;
         }
