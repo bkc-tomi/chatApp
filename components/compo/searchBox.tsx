@@ -14,12 +14,12 @@ const useStyles = makeStyles(() => createStyles({
         position: "relative",
         display: "inline-block",
         boxSizing: "border-box",
-        width: "70%",
+        width: "75%",
     },
     btnBox: {
         position: "relative",
         display: "inline-block",
-        width: "30%",
+        width: "25%",
         textAlign: "center",
         top: "18px",
     },
@@ -85,6 +85,7 @@ const SearchBox:FC = () => {
             <div className={ classes.btnBox }>
                 <div>
                     <BasicButton
+                        fullWidth={ true }
                         onclick={ searchChatroom }
                     >
                         検索

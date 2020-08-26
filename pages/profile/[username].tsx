@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import BasicHead from "../../components/atom/head";
 import TitleLogo from "../../components/atom/logo";
 import BasicButton from "../../components/atom/button";
+import BasicH3 from "../../components/atom/basicH3";
 import BasicParagraph from "../../components/atom/basicP";
 import ContainerDiv from "../../components/atom/containerDiv";
 import SearchBox from "../../components/compo/searchBox";
@@ -33,8 +34,6 @@ export default function Profile() {
             const usr = getActiveUser();
             const [msg, temp] = await getChatroomFromFirestore(usr.uid);
             if (msg === "get chatroom successfully!") {
-                // ボタンを表示するcssクラスを付与
-                console.log(msg);
                 setRoomExist(true);
             } else {
                 setRoomExist(false);
@@ -44,22 +43,36 @@ export default function Profile() {
 
     const createChatroom = async() => {
         const owner:string = user.displayName;
+        const date = Date.now();
         const chatroom:ChatroomType = {
             owner:    owner,
             roomname: "",
-            member:   [],
-            chats:    [],
+            member: [],
+            chats:  [
+                {
+                    text: `ここは、${ user.displayName }のチャットルームだよ！下のフォームから投稿してね！`,
+                    date: date,
+                    uid : "chat-bot",
+                    username: "chat-bot",
+                    photoURL: "/static/chat-bot.png",
+                },
+            ],
         }
         const msg = await setChatroomToFirestore(chatroom, user.uid);
         console.log(msg);
 
         const [getmsg, temp] = await getChatroomFromFirestore(user.uid);
         if (getmsg === "get chatroom successfully!") {
-            // ボタンを表示するcssクラスを付与
             setRoomExist(true);
         } else {
             setRoomExist(false);
         }
+    }
+
+    const copyURL = () => {
+        const URL = document.getElementById("roomURL").textContent;
+        navigator.clipboard.writeText(URL);
+        console.log(URL);
     }
     
     const createRoomBtn = () => {
@@ -74,12 +87,37 @@ export default function Profile() {
             );
         }
         return (
-            <BasicButton
-                fullWidth ={ true }
-                onclick   ={ createChatroom }
-            >
-                チャットルーム初期化
-            </BasicButton>
+            <div>
+                <div className={ Styles.Roombtn }>
+                    <BasicButton
+                        fullWidth ={ true }
+                        onclick   ={ createChatroom }
+                    >
+                        チャットルーム初期化
+                    </BasicButton>
+                </div>
+                    <div>
+                        <BasicH3>
+                            以下のURLを教えてチャットルームに招待しよう！
+                        </BasicH3>
+                    </div>
+                <div className={ Styles.copydiv }>
+                    <div id="roomURL" className={ Styles.url }>
+                        <BasicParagraph>
+                            { location.protocol + "//" + location.host + `/chatroom/${user.uid}` }
+                        </BasicParagraph>
+                    </div>
+                    <div className={ Styles.copyBtn }>
+                        <BasicButton
+                            fullWidth={ true }
+                            onclick={ copyURL }
+                        >
+                            コピー
+                        </BasicButton>
+                    </div>
+                </div>
+            </div>
+
         );
     }
 
@@ -88,7 +126,7 @@ export default function Profile() {
             await getChatroom();
             await getUserData();
         })();
-    }, [setUser, setRoomExist]);
+    }, [setRoomExist]);
 
     if (user) {
         return (
@@ -101,8 +139,17 @@ export default function Profile() {
 
                     <div　className={ Styles.maincontainer }>
                         <ContainerDiv>
-                                { createRoomBtn() }
-                                <div className={ Styles.span }></div>
+                            <div>
+                                <BasicH3>
+                                    チャットルーム作成＆初期化
+                                </BasicH3>
+                                <BasicParagraph>
+                                    まずは自分のチャットルームを作成しましょう。もし誰かのチャットルームに参加する場合は、
+                                    下の検索ボックスから検索するかチャットルームのURLを教えて貰いましょう。
+                                </BasicParagraph>
+                            </div>
+                            { createRoomBtn() }
+                            <div className={ Styles.mychatroom }>
                                 <BasicButton
                                     fullWidth ={ true }
                                     disabled  ={ !roomExist }
@@ -110,19 +157,24 @@ export default function Profile() {
                                 >
                                     自分のチャットルームへ
                                 </BasicButton>
+                            </div>
 
-                                <div className={ Styles.search }>
-                                    <BasicParagraph>
-                                        他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
-                                    </BasicParagraph>
-                                    <SearchBox />
-                                </div>
+                            <div className={ Styles.search }>
+                                <BasicH3>
+                                    チャットルーム検索
+                                </BasicH3>
+                                <BasicParagraph>
+                                    他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
+                                </BasicParagraph>
+                                <SearchBox />
+                            </div>
                         </ContainerDiv>
                     </div>
-
-                    <UserField 
-                        user={ user }
-                    />
+                    <div className={ Styles.userField }>
+                        <UserField 
+                            user={ user }
+                        />
+                    </div>
                 </main>
                 <SignoutButton />
             </div>

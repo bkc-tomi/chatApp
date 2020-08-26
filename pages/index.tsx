@@ -5,7 +5,6 @@ import basicData from "../components/atom/basicData";
 import BasicButton from "../components/atom/button";
 import BasicParagraph from "../components/atom/basicP";
 import TitleLogo from "../components/atom/logo";
-import CreateNow from "../components/compo/createNow";
 
 import styles from "../styles/root.module.css";
 import MediaQuery from "react-responsive";
@@ -40,7 +39,6 @@ export default function Home() {
                             </div>
                         </Tooltip>
                     </div>
-                    <CreateNow />
                 </main>
             </MediaQuery>
 
@@ -64,7 +62,6 @@ export default function Home() {
                             </div>
                         </Tooltip>
                     </div>
-                    <CreateNow />
                 </main>
             </MediaQuery>
         </div>
