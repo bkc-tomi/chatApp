@@ -72,7 +72,7 @@ export default function Profile() {
     const copyURL = () => {
         const URL = document.getElementById("roomURL").textContent;
         navigator.clipboard.writeText(URL);
-        console.log(URL);
+        alert("コピー!!");
     }
     
     const createRoomBtn = () => {
