@@ -104,7 +104,7 @@ export default function Profile() {
                 <div className={ Styles.copydiv }>
                     <div id="roomURL" className={ Styles.url }>
                         <BasicParagraph>
-                            { location.protocol　+ location.host + `/chatroom/${user.uid}` }
+                            { location.protocol + "://" + location.host + `/chatroom/${user.uid}` }
                         </BasicParagraph>
                     </div>
                     <div className={ Styles.copyBtn }>
