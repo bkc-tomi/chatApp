@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import BasicHead from "../../components/atom/head";
 import TitleLogo from "../../components/atom/logo";
 import BasicButton from "../../components/atom/button";
+import BasicH3 from "../../components/atom/basicH3";
 import BasicParagraph from "../../components/atom/basicP";
 import ContainerDiv from "../../components/atom/containerDiv";
 import SearchBox from "../../components/compo/searchBox";
@@ -67,6 +68,12 @@ export default function Profile() {
             setRoomExist(false);
         }
     }
+
+    const copyURL = () => {
+        const URL = document.getElementById("roomURL").textContent;
+        navigator.clipboard.writeText(URL);
+        console.log(URL);
+    }
     
     const createRoomBtn = () => {
         if (!roomExist) {
@@ -80,12 +87,37 @@ export default function Profile() {
             );
         }
         return (
-            <BasicButton
-                fullWidth ={ true }
-                onclick   ={ createChatroom }
-            >
-                チャットルーム初期化
-            </BasicButton>
+            <div>
+                <div className={ Styles.Roombtn }>
+                    <BasicButton
+                        fullWidth ={ true }
+                        onclick   ={ createChatroom }
+                    >
+                        チャットルーム初期化
+                    </BasicButton>
+                </div>
+                    <div>
+                        <BasicH3>
+                            以下のURLを教えてチャットルームに招待しよう！
+                        </BasicH3>
+                    </div>
+                <div className={ Styles.copydiv }>
+                    <div id="roomURL" className={ Styles.url }>
+                        <BasicParagraph>
+                            { location.host + `/chatroom/${user.uid}` }
+                        </BasicParagraph>
+                    </div>
+                    <div className={ Styles.copyBtn }>
+                        <BasicButton
+                            fullWidth={ true }
+                            onclick={ copyURL }
+                        >
+                            コピー
+                        </BasicButton>
+                    </div>
+                </div>
+            </div>
+
         );
     }
 
@@ -107,8 +139,17 @@ export default function Profile() {
 
                     <div　className={ Styles.maincontainer }>
                         <ContainerDiv>
-                                { createRoomBtn() }
-                                <div className={ Styles.span }></div>
+                            <div>
+                                <BasicH3>
+                                    チャットルーム作成＆初期化
+                                </BasicH3>
+                                <BasicParagraph>
+                                    まずは自分のチャットルームを作成しましょう。もし誰かのチャットルームに参加する場合は、
+                                    下の検索ボックスから検索するかチャットルームのURLを教えて貰いましょう。
+                                </BasicParagraph>
+                            </div>
+                            { createRoomBtn() }
+                            <div className={ Styles.mychatroom }>
                                 <BasicButton
                                     fullWidth ={ true }
                                     disabled  ={ !roomExist }
@@ -116,13 +157,17 @@ export default function Profile() {
                                 >
                                     自分のチャットルームへ
                                 </BasicButton>
+                            </div>
 
-                                <div className={ Styles.search }>
-                                    <BasicParagraph>
-                                        他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
-                                    </BasicParagraph>
-                                    <SearchBox />
-                                </div>
+                            <div className={ Styles.search }>
+                                <BasicH3>
+                                    チャットルーム検索
+                                </BasicH3>
+                                <BasicParagraph>
+                                    他の人のチャットルームを検索する場合は以下の検索ボックスを使ってください。
+                                </BasicParagraph>
+                                <SearchBox />
+                            </div>
                         </ContainerDiv>
                     </div>
                     <div className={ Styles.userField }>

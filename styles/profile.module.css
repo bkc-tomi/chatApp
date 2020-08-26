@@ -14,12 +14,12 @@
 }
 
 .search {
-    margin: 1rem auto;
+    margin: 2rem auto 1rem;
 
 }
 
-.span {
-    height: 10px;
+.mychatroom {
+    margin: 2rem auto 0.5rem;
 }
 
 .nouser {
@@ -31,4 +31,23 @@
     position: fixed;
     bottom: 10px;
     right: 10px;
+}
+
+.Roombtn {
+    margin: 0.5rem auto 2rem;
+}
+
+.copydiv {
+    padding: 0 0 1rem;
+}
+
+.url {
+    float: left;
+    width: 75%;
+    overflow: auto;
+}
+
+.copyBtn {
+    float: left;
+    width: 25%;
 }

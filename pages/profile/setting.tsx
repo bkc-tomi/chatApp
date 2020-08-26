@@ -101,6 +101,7 @@ export default function SettingProfile() {
                         <div　className={ Styles.paragraph }>
                             <BasicParagraph>
                                 まず、ここでユーザネームとプロフィール写真を設定してください。ユーザネームは必ず指定してください。
+                                プロフィール写真は登録する必要はありませんが、チャット相手がわかりやすいよう登録することを勧めています。
                             </BasicParagraph>
                         </div>
 
