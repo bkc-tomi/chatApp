@@ -43,11 +43,11 @@
 
 .url {
     float: left;
-    width: 75%;
+    width: 70%;
     overflow: auto;
 }
 
 .copyBtn {
     float: left;
-    width: 25%;
+    width: 30%;
 }
