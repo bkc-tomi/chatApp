@@ -49,12 +49,27 @@ const SearchBox:FC = () => {
         if (rooms.length === 0) {
             return (
                 <ul className={ classes.ulStyle }>
-                    <li>ルームなし</li>
+                    <li>
+                        <BasicButton
+                            fullWidth={ true }
+                            onclick={() => router.push("/chatroom/[roomid]", `/chatroom/owner`) }
+                        >
+                            開発者のチャットルーム:感想・要望など
+                        </BasicButton>
+                    </li>
                 </ul>
             );
         }
         return (
             <ul className={ classes.ulStyle }>
+                <li>
+                    <BasicButton
+                        fullWidth={ true }
+                        onclick={() => router.push("/chatroom/[roomid]", `/chatroom/owner`) }
+                    >
+                        開発者のチャットルーム:感想・要望など
+                    </BasicButton>
+                </li>
                 { rooms.map((room, index) => {
                     return (
                         <li key={ index }>
